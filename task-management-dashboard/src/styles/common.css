@@ -1,0 +1,61 @@
+/* Common component styles */
+
+/* Button Styles */
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* Card Styles */
+.card-custom {
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card-custom:hover {
+  box-shadow: var(--shadow);
+}
+
+/* Form Styles */
+.form-custom {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-custom:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.25);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.spinner-custom {
+  width: 3rem;
+  height: 3rem;
+  color: var(--primary-color);
+}
+
+/* Error Message */
+.error-message {
+  background: linear-gradient(135deg, #fecaca 0%, #fed7d7 100%);
+  border-left: 4px solid var(--danger-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
