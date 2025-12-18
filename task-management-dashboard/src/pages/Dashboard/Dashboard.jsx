@@ -16,9 +16,9 @@ const Dashboard = () => {
   // Calculate stats
   const totalProjects = projects.length;
   const totalTasks = tasks.length;
-//   const todoTasks = tasks.filter(task => task.status === 'todo').length;
-  const inProgressTasks = tasks.filter(task => task.status === 'inprogress').length;
-  const doneTasks = tasks.filter(task => task.status === 'done').length;
+  const todoTasks = tasks.filter(task => task.status === 'To Do').length;
+  const inProgressTasks = tasks.filter(task => task.status === 'In Progress').length;
+  const doneTasks = tasks.filter(task => task.status === 'Done').length;
 
   if (loading) {
     return (
@@ -75,6 +75,13 @@ const Dashboard = () => {
             <p>Total Tasks</p>
           </div>
           <i className="bi bi-list-task stat-icon"></i>
+        </div>
+        <div className="stat-card stat-todo">
+          <div className="stat-content">
+            <h3>{todoTasks}</h3>
+            <p>To Do</p>
+          </div>
+          <i className="bi bi-check-circle stat-icon"></i>
         </div>
         <div className="stat-card stat-inprogress">
           <div className="stat-content">

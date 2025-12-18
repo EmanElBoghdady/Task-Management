@@ -1,7 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { fetchProjects, fetchAllTasks } from '../services/api';
 
 const TasksContext = createContext();
+
 
 export const useTasks = () => {
   const context = useContext(TasksContext);
@@ -252,6 +254,9 @@ export const TaskProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
+
+
+    
   };
 
   return (
