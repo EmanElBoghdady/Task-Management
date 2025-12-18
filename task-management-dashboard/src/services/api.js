@@ -1,48 +1,4 @@
-// // src/services/api.js
-// import axios from 'axios';
 
-// const API_BASE = "https://693e6d8512c964ee6b6d589a.mockapi.io/api/v1";
-
-// // Fetch all projects
-// export const fetchProjects = async () => {
-//   try {
-//     console.log('Fetching projects from API...');
-//     const response = await axios.get(`${API_BASE}/projects`);
-//     console.log('Projects API response:', response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching projects:', error);
-//     throw error;
-//   }
-// };
-
-// // Fetch all tasks
-// export const fetchAllTasks = async () => {
-//   try {
-//     console.log('Fetching all tasks from API...');
-//     const response = await axios.get(`${API_BASE}/tasks`);
-//     console.log('Tasks API response:', response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching tasks:', error);
-//     throw error;
-//   }
-// };
-
-// // Fetch tasks for a specific project
-// export const fetchTasks = async (projectId) => {
-//   try {
-//     console.log(`Fetching tasks for project ${projectId}...`);
-//     const response = await axios.get(`${API_BASE}/tasks`);
-//     const projectIdStr = projectId.toString();
-//     const filteredTasks = response.data.filter(task => task.projectId === projectIdStr);
-//     console.log(`Filtered tasks for project ${projectIdStr}:`, filteredTasks);
-//     return filteredTasks;
-//   } catch (error) {
-//     console.error('Error fetching project tasks:', error);
-//     throw error;
-//   }
-// };
 
 
 
