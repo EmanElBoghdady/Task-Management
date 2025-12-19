@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Redirect to the main page
+        const path = window.location.pathname;
+        const repoName = 'task-management-dashboard'; // Change to your repo name
+        const basePath = `/${repoName}/`;
+        
+        // If we're not at the base path, redirect
+        if (!path.startsWith(basePath)) {
+            window.location.href = basePath + window.location.hash;
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>Redirecting to Task Management Dashboard...</h1>
+        <p>If you are not redirected automatically, <a id="redirectLink" href="#">click here</a>.</p>
+    </div>
+    <script>
+        document.getElementById('redirectLink').href = basePath;
+    </script>
+</body>
+</html>

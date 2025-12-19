@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
 import './ProjectCard.css';
+import { useTasks } from '../../context/TasksContext.jsx';
 
 const ProjectCard = ({ project }) => {
-  const { id, title, description, tasksCount = 0 } = project;
+  const { id, title, description} = project;
+  const { tasks } = useTasks(); 
+
+   // Calculate actual task count from tasks array
+  const actualTaskCount = tasks.filter(task => 
+    task.projectId && task.projectId.toString() === id.toString()
+  ).length;
   
   const colors = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
   const colorIndex = id ? parseInt(id) % colors.length : 0;
@@ -28,7 +35,7 @@ const ProjectCard = ({ project }) => {
           <div className="project-stats">
             <span className="task-count">
               <i className="bi bi-list-task me-1"></i>
-              {tasksCount} {tasksCount === 1 ? 'task' : 'tasks'}
+              {actualTaskCount} {actualTaskCount === 1 ? 'task' : 'tasks'}
             </span>
           </div>
           

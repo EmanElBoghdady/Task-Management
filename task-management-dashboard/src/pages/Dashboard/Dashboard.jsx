@@ -8,7 +8,21 @@ const Dashboard = () => {
   const { projects, tasks, loading, error } = useTasks();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredProjects = projects.filter(project =>
+
+  // Recalculate task counts for each project
+  const projectsWithUpdatedCounts = projects.map(project => {
+    const projectTasks = tasks.filter(task => 
+      task.projectId && task.projectId.toString() === project.id.toString()
+    );
+    
+    return {
+      ...project,
+      tasksCount: projectTasks.length
+    };
+  });
+
+  // Use the updated projects with correct task counts
+  const filteredProjects = projectsWithUpdatedCounts.filter(project =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     project.description.toLowerCase().includes(searchTerm.toLowerCase())
   );

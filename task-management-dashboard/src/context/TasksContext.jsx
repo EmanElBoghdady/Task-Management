@@ -89,59 +89,72 @@ export const TaskProvider = ({ children }) => {
   }, []);
 
   // ADD TASK FUNCTION with API call
-  const addTask = async (newTask) => {
-    try {
-      const taskWithId = {
-        ...newTask,
-        id: Date.now().toString(),
-        projectId: newTask.projectId.toString()
-      };
-      
-      console.log('Adding new task:', taskWithId);
-      
-      
-      // Update tasks state
-      setTasks(prevTasks => [...prevTasks, taskWithId]);
-      
-      // Update project task count
-      setProjects(prevProjects => 
-        prevProjects.map(project => 
-          project.id === newTask.projectId.toString()
-            ? { ...project, tasksCount: (project.tasksCount || 0) + 1 }
-            : project
-        )
-      );
-      
-      console.log('Task added successfully');
-      return taskWithId;
-    } catch (error) {
-      console.error('Error adding task:', error);
-      throw error;
-    }
+ // ADD TASK FUNCTION - FIXED VERSION
+const addTask = (newTask) => {
+  const taskWithId = {
+    ...newTask,
+    id: Date.now().toString(),
+    projectId: newTask.projectId.toString()
   };
+  
+  console.log('Adding new task:', taskWithId);
+  console.log('Current projects before update:', projects);
+  
+  // Update tasks state FIRST
+  const updatedTasks = [...tasks, taskWithId];
+  setTasks(updatedTasks);
+  
+  // Then update project task count - FIXED LOGIC
+  setProjects(prevProjects => {
+    console.log('Previous projects in setProjects:', prevProjects);
+    
+    const updatedProjects = prevProjects.map(project => {
+      console.log(`Checking project ${project.id} against ${newTask.projectId}`);
+      
+      if (project.id.toString() === newTask.projectId.toString()) {
+        // Count how many tasks actually belong to this project
+        const tasksForThisProject = updatedTasks.filter(
+          task => task.projectId.toString() === project.id.toString()
+        );
+        
+        console.log(`Project ${project.id} now has ${tasksForThisProject.length} tasks`);
+        
+        return {
+          ...project,
+          tasksCount: tasksForThisProject.length
+        };
+      }
+      return project;
+    });
+    
+    console.log('Updated projects:', updatedProjects);
+  
+    
+    return updatedProjects;
+  });
+  
+  return taskWithId;
+};
 
-  // ADD PROJECT FUNCTION with API call
-  const addProject = async (newProject) => {
-    try {
-      const projectWithId = {
-        ...newProject,
-        id: Date.now().toString(),
-        tasksCount: 0
-      };
-      
-      console.log('Adding new project:', projectWithId);
-      
-      // In a real app, you would POST to your API here
-      // For now, we'll just update local state
-      
-      setProjects(prevProjects => [...prevProjects, projectWithId]);
-      console.log('Project added successfully');
-      return projectWithId;
-    } catch (error) {
-      console.error('Error adding project:', error);
-      throw error;
-    }
+  // ADD PROJECT FUNCTION - IMPROVED VERSION
+const addProject = (newProject) => {
+  const projectWithId = {
+    ...newProject,
+    id: Date.now().toString(),
+    tasksCount: 0 // Initialize with 0 tasks
   };
+  
+  console.log('Adding new project:', projectWithId);
+  
+  setProjects(prevProjects => {
+    const updatedProjects = [...prevProjects, projectWithId];
+
+    console.log('Updated projects after addition:', updatedProjects);
+    return updatedProjects;
+  });
+  
+  return projectWithId;
+};
 
   // DELETE TASK FUNCTION
   const deleteTask = (taskId) => {
@@ -233,6 +246,27 @@ export const TaskProvider = ({ children }) => {
     return tasks.filter(task => task.projectId === projectId.toString());
   };
 
+  // Function to recalculate all task counts
+const recalculateTaskCounts = () => {
+  console.log('Recalculating task counts for all projects...');
+  
+  setProjects(prevProjects => {
+    const updatedProjects = prevProjects.map(project => {
+      const projectTasks = tasks.filter(task => 
+        task.projectId && task.projectId.toString() === project.id.toString()
+      );
+      
+      return {
+        ...project,
+        tasksCount: projectTasks.length
+      };
+    });
+    
+  
+    return updatedProjects;
+  });
+};
+
   // REFRESH DATA
   const refreshData = async () => {
     try {
@@ -272,6 +306,7 @@ export const TaskProvider = ({ children }) => {
       updateTaskStatus,
       getProjectById,
       getProjectTasks,
+      recalculateTaskCounts,
       refreshData
     }}>
       {children}

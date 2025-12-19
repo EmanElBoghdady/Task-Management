@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import ProjectTasks from './pages/ProjectTasks/ProjectTasks.jsx';
 import AddTask from './pages/AddTask/AddTask.jsx';
 import AddProject from './pages/AddProject/AddProject.jsx';
+import NotFound from './pages/NotFound/NotFound.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/project/:id" element={<ProjectTasks />} />
             <Route path="/add-task" element={<AddTask />} />
             <Route path="/add-project" element={<AddProject />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </TaskProvider>
