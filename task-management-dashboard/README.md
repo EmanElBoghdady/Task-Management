@@ -141,17 +141,17 @@ Consistent styling across themes
 Member 3: API & State Logic
 Responsibilities:
 
-✅ Created TasksContext for state management
+Created TasksContext for state management
 
-✅ Integrated with MockAPI.io endpoints
+Integrated with MockAPI.io endpoints
 
-✅ Implemented data fetching with fallback
+Implemented data fetching with fallback
 
-✅ Created CRUD operations for tasks/projects
+Created CRUD operations for tasks/projects
 
-✅ Added loading and error states
+Added loading and error states
 
-✅ Implemented drag & drop functionality
+Implemented drag & drop functionality
 
 Features Implemented:
 
@@ -170,17 +170,17 @@ Refresh data functionality
 Member 4: Forms
 Responsibilities:
 
-✅ Built AddTask form with validation
+Built AddTask form with validation
 
-✅ Created AddProject form
+Created AddProject form
 
-✅ Implemented form submission logic
+Implemented form submission logic
 
-✅ Added form styling for both themes
+Added form styling for both themes
 
-✅ Integrated forms with context API
+Integrated forms with context API
 
-✅ Added form validation and error messages
+Added form validation and error messages
 
 Features Implemented:
 
@@ -196,7 +196,7 @@ Consistent form styling
 
 Integration with state management
 
-🔧 Available Scripts
+Available Scripts
 npm run dev - Start development server
 
 npm run build - Build for production
@@ -205,13 +205,15 @@ npm run preview - Preview production build
 
 npm run lint - Run ESLint
 
-🌐 API Integration
+API Integration
 The app uses MockAPI.io for data storage:
 
 Endpoints:
 GET /projects - Fetch all projects
 
 GET /tasks - Fetch all tasks
+
+Handeled with REACT locally
 
 POST /projects - Create new project
 
