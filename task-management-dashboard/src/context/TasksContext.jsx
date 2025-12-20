@@ -88,8 +88,7 @@ export const TaskProvider = ({ children }) => {
     loadInitialData();
   }, []);
 
-  // ADD TASK FUNCTION with API call
- // ADD TASK FUNCTION - FIXED VERSION
+ 
 const addTask = (newTask) => {
   const taskWithId = {
     ...newTask,
@@ -100,11 +99,9 @@ const addTask = (newTask) => {
   console.log('Adding new task:', taskWithId);
   console.log('Current projects before update:', projects);
   
-  // Update tasks state FIRST
   const updatedTasks = [...tasks, taskWithId];
   setTasks(updatedTasks);
   
-  // Then update project task count - FIXED LOGIC
   setProjects(prevProjects => {
     console.log('Previous projects in setProjects:', prevProjects);
     
@@ -136,12 +133,13 @@ const addTask = (newTask) => {
   return taskWithId;
 };
 
-  // ADD PROJECT FUNCTION - IMPROVED VERSION
+  // ADD PROJECT FUNCTION 
 const addProject = (newProject) => {
+
   const projectWithId = {
     ...newProject,
     id: Date.now().toString(),
-    tasksCount: 0 // Initialize with 0 tasks
+    tasksCount: 0 
   };
   
   console.log('Adding new project:', projectWithId);
@@ -247,25 +245,25 @@ const addProject = (newProject) => {
   };
 
   // Function to recalculate all task counts
-const recalculateTaskCounts = () => {
-  console.log('Recalculating task counts for all projects...');
-  
-  setProjects(prevProjects => {
-    const updatedProjects = prevProjects.map(project => {
-      const projectTasks = tasks.filter(task => 
-        task.projectId && task.projectId.toString() === project.id.toString()
-      );
-      
-      return {
-        ...project,
-        tasksCount: projectTasks.length
-      };
-    });
+  const recalculateTaskCounts = () => {
+    console.log('Recalculating task counts for all projects...');
     
-  
-    return updatedProjects;
-  });
-};
+    setProjects(prevProjects => {
+      const updatedProjects = prevProjects.map(project => {
+        const projectTasks = tasks.filter(task => 
+          task.projectId && task.projectId.toString() === project.id.toString()
+        );
+        
+        return {
+          ...project,
+          tasksCount: projectTasks.length
+        };
+      });
+      
+    
+      return updatedProjects;
+    });
+  };
 
   // REFRESH DATA
   const refreshData = async () => {

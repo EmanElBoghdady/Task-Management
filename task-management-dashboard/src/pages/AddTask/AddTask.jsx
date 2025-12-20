@@ -48,8 +48,8 @@ const AddTask = () => {
       // Call addTask
       const addedTask = addTask(formData);
       
-      console.log('✅ Task added successfully:', addedTask);
-      console.log('🔀 Redirecting to project:', formData.projectId);
+      console.log(' Task added successfully:', addedTask);
+      console.log(' Redirecting to project:', formData.projectId);
       
       setIsSubmitting(false);
       navigate(`/project/${formData.projectId}`);

@@ -1,10 +1,5 @@
-
-
-
-
 import axios from 'axios';
 
-// MockAPI.io base URL - Use your actual MockAPI URL
 const API_BASE = "https://693e6d8512c964ee6b6d589a.mockapi.io/api/v1";
 
 // Create axios instance with default config
@@ -40,10 +35,7 @@ api.interceptors.response.use(
   }
 );
 
-/**
- * Fetch all projects from API
- * @returns {Promise<Array>} Array of projects
- */
+
 export const fetchProjects = async () => {
   try {
     console.log('Fetching projects from:', `${API_BASE}/projects`);
@@ -74,10 +66,6 @@ export const fetchProjects = async () => {
   }
 };
 
-/**
- * Fetch all tasks from API
- * @returns {Promise<Array>} Array of all tasks
- */
 export const fetchAllTasks = async () => {
   try {
     console.log('Fetching all tasks from:', `${API_BASE}/tasks`);
@@ -109,11 +97,6 @@ export const fetchAllTasks = async () => {
   }
 };
 
-/**
- * Fetch tasks for a specific project
- * @param {string|number} projectId - The project ID
- * @returns {Promise<Array>} Array of tasks for the project
- */
 export const fetchTasks = async (projectId) => {
   try {
     const projectIdStr = projectId.toString();
@@ -155,18 +138,13 @@ export const fetchTasks = async (projectId) => {
   }
 };
 
-/**
- * Add a new task via API
- * @param {Object} taskData - Task data to add
- * @returns {Promise<Object>} The created task
- */
+//dealing with api //
 export const addTaskToAPI = async (taskData) => {
   try {
     console.log('Adding task to API:', taskData);
     
     const response = await api.post('/tasks', {
       ...taskData,
-      // Ensure proper formatting
       projectId: taskData.projectId.toString(),
       status: taskData.status || 'To Do'
     });
@@ -179,11 +157,6 @@ export const addTaskToAPI = async (taskData) => {
   }
 };
 
-/**
- * Add a new project via API
- * @param {Object} projectData - Project data to add
- * @returns {Promise<Object>} The created project
- */
 export const addProjectToAPI = async (projectData) => {
   try {
     console.log('Adding project to API:', projectData);
@@ -201,11 +174,6 @@ export const addProjectToAPI = async (projectData) => {
   }
 };
 
-/**
- * Delete a task via API
- * @param {string} taskId - Task ID to delete
- * @returns {Promise<void>}
- */
 export const deleteTaskFromAPI = async (taskId) => {
   try {
     console.log(`Deleting task ${taskId} from API`);
@@ -218,12 +186,7 @@ export const deleteTaskFromAPI = async (taskId) => {
   }
 };
 
-/**
- * Update task status via API
- * @param {string} taskId - Task ID to update
- * @param {string} newStatus - New status for the task
- * @returns {Promise<Object>} The updated task
- */
+
 export const updateTaskStatusInAPI = async (taskId, newStatus) => {
   try {
     console.log(`Updating task ${taskId} status to ${newStatus} in API`);
@@ -244,11 +207,7 @@ export const updateTaskStatusInAPI = async (taskId, newStatus) => {
     throw error;
   }
 };
-
-/**
- * Fallback projects data (used when API fails)
- * @returns {Array} Array of fallback projects
- */
+//////////////////////////////////////
 const getFallbackProjects = () => [
   { 
     id: "1", 
@@ -276,10 +235,7 @@ const getFallbackProjects = () => [
   }
 ];
 
-/**
- * Fallback tasks data (used when API fails)
- * @returns {Array} Array of fallback tasks
- */
+
 const getFallbackTasks = () => [
   { id: "1", title: "Design Homepage", description: "Create wireframes and mockups", status: "In Progress", projectId: "1" },
   { id: "2", title: "API Integration", description: "Connect third-party APIs", status: "To Do", projectId: "1" },
@@ -291,5 +247,4 @@ const getFallbackTasks = () => [
   { id: "8", title: "User Authentication", description: "Implement login system", status: "Done", projectId: "4" }
 ];
 
-// Export the api instance for other uses if needed
 export { api };

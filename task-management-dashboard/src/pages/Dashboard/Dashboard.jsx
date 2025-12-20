@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
 
-  // Recalculate task counts for each project
+  
   const projectsWithUpdatedCounts = projects.map(project => {
     const projectTasks = tasks.filter(task => 
       task.projectId && task.projectId.toString() === project.id.toString()
@@ -21,7 +21,7 @@ const Dashboard = () => {
     };
   });
 
-  // Use the updated projects with correct task counts
+ 
   const filteredProjects = projectsWithUpdatedCounts.filter(project =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     project.description.toLowerCase().includes(searchTerm.toLowerCase())
